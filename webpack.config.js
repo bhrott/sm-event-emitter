@@ -1,36 +1,42 @@
-var path = require('path');
 var webpack = require('webpack');
-var PROD = process.env.PROD_ENV == 1;
+var path = require('path');
 
-console.log('PROD: ' + PROD);
-
+var libraryName = 'sm-event-emitter';
+var outputFile = libraryName + '.js';
 var plugins = [];
 
-if(PROD) {
-	plugins.push(
-		new webpack.optimize.UglifyJsPlugin({
-			compress: { warnings: false }
-		})
-	);
-}
-
-module.exports = {
-	entry: './src/event-emitter.js',
+var config = {
+	entry: __dirname + '/src/index.js',
+	devtool: 'source-map',
 	output: {
-		path: __dirname,
-		filename: 'index.js'
+		path: __dirname + '/lib',
+		filename: outputFile,
+		library: libraryName,
+		libraryTarget: 'umd',
+		umdNamedDefine: true
 	},
 	module: {
 		loaders: [
 			{
-				test: path.join(__dirname, 'src'),
-				exclude: /node_modules/,
-				loader: 'babel-loader',
+				test: /(\.jsx|\.js)$/,
+				loader: 'babel',
+				exclude: /(node_modules|bower_components)/,
 				query: {
 					presets: ['es2015']
 				}
+			},
+			{
+				test: /(\.jsx|\.js)$/,
+				loader: "eslint-loader",
+				exclude: /node_modules/
 			}
-		],
-		plugins: plugins
-	}
+		]
+	},
+	resolve: {
+		root: path.resolve('./src'),
+		extensions: ['', '.js']
+	},
+	plugins: plugins
 };
+
+module.exports = config;
