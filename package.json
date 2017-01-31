@@ -1,11 +1,10 @@
 {
   "name": "sm-event-emitter",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "A super small event-emitter for javascript",
-  "main": "lib/sm-event-emitter.js",
+  "main": "index.js",
   "scripts": {
-    "build": "webpack --progress --colors",
-    "prepublish": "npm run build"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,16 +24,10 @@
   },
   "homepage": "https://github.com/benhurott/sm-event-emitter#readme",
   "devDependencies": {
-    "babel": "^6.3.13",
-    "babel-core": "^6.1.18",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.1.0",
-    "babel-plugin-add-module-exports": "^0.1.2",
-    "babel-preset-es2015": "^6.18.0",
-    "chai": "^3.4.1",
-    "eslint": "^1.7.2",
-    "eslint-loader": "^1.1.0",
-    "mocha": "^2.3.4",
-    "webpack": "^1.12.9"
+    "jest": "^18.1.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testPathDirs": ["tests"]
   }
 }
